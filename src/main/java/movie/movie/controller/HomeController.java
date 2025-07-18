@@ -1,21 +1,16 @@
 package movie.movie.controller;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import movie.movie.domain.User;
 import movie.movie.dto.CreateUserDto;
-import movie.movie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
+    //初期画面
     @GetMapping("/home")
     public String home(Model model) {
 
@@ -24,12 +19,14 @@ public class HomeController {
         return "home";
     }
 
+    //会員
     @GetMapping("/home/main")
     public String main() {
 
         return "main";
     }
 
+    //管理者
     @GetMapping("/home/admin")
     public String admin() {
 

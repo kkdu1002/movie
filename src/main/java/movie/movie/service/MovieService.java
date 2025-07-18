@@ -18,29 +18,34 @@
 
         private final MovieRepository movieRepository;
 
+        //格納
         @Transactional(readOnly = false)
         public void save(Movie movie) {
             movieRepository.save(movie);
         }
 
+        //１件検索
         public Movie findOne(Long id) {
             return movieRepository.findOne(id);
         }
 
+        // 全件検索
         public List<Movie> findAll() {
             return movieRepository.findAll();
         }
 
+        //監督、ジャンル、タイトル検索
         public List<Movie> findMovieData(String director  , String genre , String title) {
             return movieRepository.findMovieData(director , genre, title);
         }
 
-
+        //更新
         @Transactional(readOnly = false)
         public Movie updateMovie(Long id , UpdateMovieDto dto) {
             return movieRepository.updateMovie(id, dto);
         }
 
+        //削除
         @Transactional(readOnly = false)
         public void deleteMovie(Long id) {
             movieRepository.deleteMovie(id);

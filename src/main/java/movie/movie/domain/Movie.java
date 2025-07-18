@@ -18,33 +18,33 @@ public class Movie {
     @Column(name = "movie_id")
     private Long id;
 
-    // movie title
+    // タイトル
     private String title;
 
-    // genre
+    // ジャンル
     private String genre;
 
-    // director
+    // 監督
     private String director;
 
-    // runtime
+    // 上映時間
     private int runtime;
 
-    // Title update
+    // タイトル更新
     public void updateTitle(String title) {
         if(StringUtils.hasText(title)) {
             this.title = title;
         }
     }
 
-    // Genre update
+    // ジャンル更新
     public void updateGenre(String genre) {
         if(StringUtils.hasText(genre)) {
             this.genre = genre;
         }
     }
 
-    // director update
+    // 監督更新
     public void updateDirector(String director) {
         if(StringUtils.hasText(director)) {
             this.director = director;

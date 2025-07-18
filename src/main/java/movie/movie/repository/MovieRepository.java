@@ -20,24 +20,24 @@ public class MovieRepository {
     private final EntityManager em;
     private final JPAQueryFactory queryFactory;
 
-    //저장
+    //格納
     @Transactional(readOnly = false)
     public void save(Movie movie) {
         em.persist(movie);
     }
 
-    // 영화1건 검색
+    // 映画１件検索
     public Movie findOne(Long movie_id) {
         return em.find(Movie.class , movie_id);
     }
 
-    // 영화 전체 검색
+    // 映画全件検索
     public List<Movie> findAll() {
         return em.createQuery("select m From Movie m" ,Movie.class)
                 .getResultList();
     }
 
-    // 영화 검색(디렉터명 , 장르 , 이름)
+    // 映画検索(監督、ジャンル、タイトル)
     public List<Movie> findMovieData(String director , String genre , String title) {
         QMovie qMovie = QMovie.movie;
 
@@ -48,20 +48,20 @@ public class MovieRepository {
                 .fetch();
     }
 
-    // 디렉터명 검색
+    // 監督名検索
     private BooleanExpression searchDirector(String director) {
         return StringUtils.hasText(director) ? QMovie.movie.director.like("%" + director + "%") : null;
     }
-    // 장르 검색
+    // ジャンル検索
     private BooleanExpression searchGenre(String genre) {
         return StringUtils.hasText(genre) ? QMovie.movie.genre.eq(genre) : null;
     }
-    // 제목 검색
+    // タイトル検索
     private BooleanExpression searchTitle(String title) {
         return StringUtils.hasText(title) ? QMovie.movie.title.like("%" + title + "%") : null;
     }
 
-    // 데이터 갱신
+    // データ更新
     @Transactional(readOnly = false)
     public Movie updateMovie(Long upd_id , UpdateMovieDto dto) {
         Movie updMovie = findOne(upd_id);
@@ -79,7 +79,7 @@ public class MovieRepository {
         return  updMovie;
     }
 
-    // 삭제
+    // 削除
     @Transactional(readOnly = false)
     public void deleteMovie(Long del_id) {
         Movie delMovie = findOne(del_id);

@@ -2,7 +2,6 @@ package movie.movie.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import movie.movie.domain.Reservation;
 import movie.movie.domain.Schedule;
 import movie.movie.domain.User;
@@ -24,6 +23,7 @@ public class ReservationController {
     private final ScheduleService scheduleService;
     private final UserService userService;
 
+    //予約情報表示
     @GetMapping("/home/reservation")
     public String initReservationAdmin(HttpSession session ,Model model) {
 
@@ -32,6 +32,7 @@ public class ReservationController {
         User user = userService.findOne(userid);
         List<Reservation> reservationList;
 
+        //管理者は全件検索
         if(user.getRole().equals("2")) {
             reservationList = reservationService.findAll();
         }
@@ -44,6 +45,7 @@ public class ReservationController {
         return "reservation";
     }
 
+    //予約画面表示
     @GetMapping("/home/insReservation")
     public String initReservation(HttpSession session , @RequestParam("id") Long scheduleId ,
                                   CreateReservationDto dto , Model model) {
@@ -62,6 +64,7 @@ public class ReservationController {
         return "insReservation";
     }
 
+    //予約処理
     @PostMapping("/home/insReservation")
     public String createReservation(@ModelAttribute CreateReservationDto reservationDto) {
         User user = userService.findOne(reservationDto.getUserId());

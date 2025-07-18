@@ -14,13 +14,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateMovieDto {
 
-    @NotBlank(message = "제목 필수")
+    @NotBlank(message = "タイトルは必須")
     private String title;
-    @NotBlank(message = "감독 필수")
+    @NotBlank(message = "映画監督は必須")
     private String director;
-    @NotNull(message = "상영시간 필수")
-    @Min(value = 1, message = "상영시간은 1분 이상이어야 합니다.")
+    @NotNull(message = "上映時間必須")
+    @Min(value = 1, message = "上映時間は１分以上です。")
     private int runtime;
-    @NotBlank(message = "장르 필수")
+    @NotBlank(message = "ジャンル必須")
     private String genre;
 }

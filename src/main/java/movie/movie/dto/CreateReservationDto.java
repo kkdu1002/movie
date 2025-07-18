@@ -13,7 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateReservationDto {
 
+    //　ユーザー
     private Long userId;
+    // スケジュール
     private Long scheduleId;
+    // 座席
     private String searNumber;
 }

@@ -22,6 +22,7 @@ public class UserController {
 
     private final UserService userService;
 
+    //ログイン処理
     @PostMapping("/home")
     public String loginForm(@RequestParam String username ,
                             @RequestParam String passwd,
@@ -44,6 +45,7 @@ public class UserController {
         }
     }
 
+    //会員登録画面表示
     @GetMapping("/home/insertUser")
     public String createUser(Model model) {
 
@@ -52,6 +54,7 @@ public class UserController {
         return "insertUser";
     }
 
+    //会員登録処理
     @PostMapping("/home/insertUser")
     public String createUserForm(@ModelAttribute CreateUserDto dto,
                                  RedirectAttributes redirectAttributes) {
@@ -69,6 +72,7 @@ public class UserController {
         return "redirect:/home";
     }
 
+    //ユーザーID、役割検索表示
     @GetMapping("/home/user")
     public String findUserNameRole(@ModelAttribute User user , Model model) {
         List<User> userNameRole;
@@ -84,6 +88,7 @@ public class UserController {
         return "user";
     }
 
+    //更新ユーザー情報表示
     @GetMapping("/home/user/{id}")
     public String userUpdate(@PathVariable("id") Long id , Model model) {
 
@@ -94,6 +99,7 @@ public class UserController {
         return "userUpdate";
     }
 
+    //ユーザー情報更新処理
     @PostMapping("/home/user/{id}")
     public String updateUserForm(@PathVariable("id") Long id , @ModelAttribute UpdateUserDto dto) {
 

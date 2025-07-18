@@ -25,31 +25,34 @@ public class Schedule {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    //상영관 이름
+    //シアター
     private String theater;
 
-    //상영 시작 시간
+    //上映時間
     @Column(name = "screen_time")
     private LocalDateTime screenTime;
 
-    //현재 예약 가능한 좌석 수
+    //予約可能座席数
     private int availableSeats;
 
     @OneToMany(mappedBy = "schedule")
     private List<Reservation> reservationList = new ArrayList<>();
 
+    //シアター変更
     public void updateTheater(String theater) {
         if(StringUtils.hasText(theater)) {
             this.theater = theater;
         }
     }
 
+    //上映時間変更
     public void updateScreenTime(LocalDateTime screenTime) {
         if(screenTime != null) {
             this.screenTime = screenTime;
         }
     }
 
+    // 使用可能座席数を計算
     public void updateAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats - reservationList.size();
     }

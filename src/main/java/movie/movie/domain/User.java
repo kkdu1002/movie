@@ -19,18 +19,19 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    // login id
+    // ユーザーID
     private String username;
 
-    // password
+    // パスワード
     private String passwd;
 
-    // email
+    // Eメール
     private String email;
 
-    // role
+    // 役割
     private String role;
 
+    //　役割初期設定
     @PrePersist
     public void persistRole() {
         this.role = "1";
@@ -40,21 +41,21 @@ public class User {
     @Builder.Default
     private List<Reservation> reservationsList = new ArrayList<>();
 
-    // 패스워드 변경
+    // パスワード変更
     public void updPasswd(String passwd) {
         if(StringUtils.hasText(passwd)) {
             this.passwd = passwd;
         }
     }
 
-    // 이메일 변경
+    // Eメール変更
     public void updEmail(String email) {
         if(StringUtils.hasText(email)) {
             this.email = email;
         }
     }
 
-    // 직위 변경
+    // 役割変更
     public void updRole(String role) {
         if(StringUtils.hasText(role)) {
             this.role = role;

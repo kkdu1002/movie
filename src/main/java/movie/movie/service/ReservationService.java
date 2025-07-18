@@ -19,24 +19,28 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ScheduleRepository scheduleRepository;
 
+    //格納
     @Transactional(readOnly = false)
     public void save(Reservation reservation) {
         reservationRepository.save(reservation);
     }
 
+    //１件検索
     public Reservation findOne(Long id) {
         return reservationRepository.findOne(id);
     }
 
+    //全件検索
     public List<Reservation> findAll() {
         return reservationRepository.findAll();
     }
 
+    //ユーザーID検索
     public List<Reservation> findUser(String username) {
         return reservationRepository.findUser(username);
     }
 
-    // 예약 변경
+    // 予約変更
     @Transactional(readOnly = false)
     public Reservation updReservation(Long upd_id , UpdateReservationDto dto) {
         Reservation updReservation = findOne(upd_id);
@@ -55,6 +59,7 @@ public class ReservationService {
         return updReservation;
     }
 
+    //予約キャンセル
     @Transactional(readOnly = false)
     public void deleteReservation(Long id) {
         reservationRepository.cancelReservation(id);

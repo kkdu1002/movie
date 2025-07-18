@@ -20,24 +20,24 @@ public class ScheduleRepository {
     private final EntityManager em;
     private final JPAQueryFactory queryFactory;
 
-    // 저장
+    // 格納
     @Transactional(readOnly = false)
     public void save(Schedule schedule) {
         em.persist(schedule);
     }
 
-    // 1건 조회
+    // スケジュール１件検索
     public Schedule findOne(Long id) {
         return em.find(Schedule.class , id);
     }
 
-    // 스케줄 전체 조회
+    // スケジュール全件検索
     public List<Schedule> findAll() {
         return em.createQuery("select s From Schedule s" , Schedule.class)
                 .getResultList();
     }
 
-    // 상영관 스케줄 조회
+    // シアタースケジュール検索
     public List<Schedule> findTheater(String theater) {
         QSchedule qSchedule = QSchedule.schedule;
         
@@ -50,7 +50,7 @@ public class ScheduleRepository {
         return StringUtils.hasText(theater) ? QSchedule.schedule.theater.eq(theater) : null;
     }
 
-    // 삭제
+    // スケジュール削除
     @Transactional(readOnly = false)
     public void deleteSchedule(Long del_id) {
         Schedule delSchedule = findOne(del_id);
@@ -59,6 +59,7 @@ public class ScheduleRepository {
         }
     }
 
+    // スケジュール変更
     @Transactional(readOnly = false)
     public void updateSchedule(Long upd_id , UpdateScheduleDto dto) {
         Schedule updSchedule = findOne(upd_id);

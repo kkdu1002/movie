@@ -11,11 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateMovieDto {
 
+    //タイトル
     private String title;
-
+    //監督
     private String director;
-
+    //ジャンル
     private String genre;
-
-
 }

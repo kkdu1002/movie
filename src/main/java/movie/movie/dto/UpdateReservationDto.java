@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UpdateReservationDto {
 
+    //スケジュール
     private Long scheduleId;
-
+    //座席
     private String seatNumber;
-
+    //予約時間
     private LocalDateTime reservationTime;
 }

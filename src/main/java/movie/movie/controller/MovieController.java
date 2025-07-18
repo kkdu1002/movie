@@ -20,6 +20,7 @@ public class MovieController {
 
     private final MovieRepository movieRepository;
 
+    //映画データ表示
     @GetMapping("/home/movie")
     public String MovieForm(@RequestParam(required = false) String director,
                             @RequestParam(required = false) String genre,
@@ -40,6 +41,7 @@ public class MovieController {
         return "movie";
     }
 
+    //映画登録画面（管理者用）
     @GetMapping("/home/movieTrk")
     public String adminMovie(Model model) {
 
@@ -51,6 +53,7 @@ public class MovieController {
         return "movieTrk";
     }
 
+    //映画登録処理（管理者用）
     @PostMapping("/home/movieTrk")
     public String MovieForm(@ModelAttribute CreateMovieDto dto) {
 
@@ -66,6 +69,7 @@ public class MovieController {
         return "redirect:/home/movieTrk";
     }
 
+    //映画削除処理（管理者用）
     @PostMapping("/home/movieTrk/delete")
     public String delMovie(@RequestParam("id") Long id
             , RedirectAttributes redirectAttributes) {

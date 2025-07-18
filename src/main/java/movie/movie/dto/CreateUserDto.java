@@ -14,14 +14,18 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor  // 기본 생성자 추가
 public class CreateUserDto {
-    @NotBlank(message = "유저 아이디는 필수")
+
+    @NotBlank(message = "ユーザーIDは必須")
     private String username;
-    @NotBlank(message = "패스워드는 필수")
+
+    @NotBlank(message = "パスワードは必須")
     @Length(min = 8 , max = 20)
-    @Pattern(regexp = ".*[!@].*", message = "비밀번호에 최소 하나의 ! 또는 @ 특수문자를 포함해야 합니다.")
+    @Pattern(regexp = ".*[!@].*", message = "パスワードに特殊文字を含めてください")
     private String passwd;
-    @NotBlank(message = "이메일 필수")
-    @Email(message = "이메일 형식에 맞지 않습니다.")
+
+    @NotBlank(message = "Eメール必須")
+    @Email(message = "Eメールの形式に合わないです。")
     private String email;
+
     private String role = "1";
 }

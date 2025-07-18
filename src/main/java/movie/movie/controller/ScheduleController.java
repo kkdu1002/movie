@@ -21,6 +21,7 @@ public class ScheduleController {
     private final MovieService movieService;
     private final ScheduleService scheduleService;
 
+    //スケジュール登録画面表示
     @PostMapping("/home/schedule")
     public String initScheduleForm(@RequestParam("id") Long movieId , Model model , CreateScheduleDto dto) {
 
@@ -30,6 +31,7 @@ public class ScheduleController {
         return "schedule";
     }
 
+    //スケジュール登録
     @PostMapping("/home/schedule/new")
     public String scheduleForm(@ModelAttribute CreateScheduleDto scheduleDto) {
 
@@ -47,6 +49,7 @@ public class ScheduleController {
         return "redirect:/home/schedule/scheduleList";
     }
 
+    //スケジュールリスト表示
     @GetMapping("/home/scheduleList")
     public String showScheduleList(Model model) {
         List<Schedule> scheduleList = scheduleService.findAll();
@@ -55,6 +58,7 @@ public class ScheduleController {
         return "scheduleList";
     }
 
+    //映画のスケジュール確認画面表示
     @GetMapping("/home/insertSchedule")
     public String insertSchedule(Model model) {
         List<Schedule> scheduleList = scheduleService.findAll();
@@ -64,6 +68,7 @@ public class ScheduleController {
         return "insertSchedule";
     }
 
+    //スケジュール更新画面表示
     @GetMapping("/home/schedule/edit/{id}")
     public String updateShowSchedule(@PathVariable("id") Long id, Model model) {
         Schedule schedule = scheduleService.findOne(id);
@@ -73,6 +78,7 @@ public class ScheduleController {
         return "updateSchedule";
     }
 
+    //スケジュール更新
     @PutMapping("/home/schedule/edit/{id}")
     @ResponseBody
     public void updateSchedule(@PathVariable Long id ,

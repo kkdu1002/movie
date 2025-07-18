@@ -10,10 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserDto {
-
+    //パスワード
     private String passwd;
-
+    //Eメール
     private String email;
-
+    //役割
     private String role;
 }
