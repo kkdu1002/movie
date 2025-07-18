@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{/home/schedule/new}" th:object="${scheduleDto}">
+  <input type="hidden" th:field="*{movieId}" />
+상영관 명 <input type="text" th:field="*{theater}"/>
+상영 시작 시간 <input type="datetime-local" th:field="*{screenTime}"/>
+예약가능 좌석 수 <input type="text" th:field="*{availableSeats}"/>
+  <button type="submit">등록</button>
+</form>
+</body>
+</html>

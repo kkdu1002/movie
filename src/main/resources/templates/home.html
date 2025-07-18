@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈 화면</title>
+</head>
+<body>
+<form method  = "post" th:action="@{/home}">
+유저 아이디<input type = "text" name = "username"><br>
+유저 패스워드<input type = "password" name = "passwd"><br>
+  <button type="submit">로그인</button><br>
+</form>
+<a th:href="@{/home/insertUser}">회원가입</a>
+</body>
+<script th:if="${loginErr != null}">
+  alert('[[${loginErr}]]');
+</script>
+<script th:if="${createUser != null}">
+  alert('[[${createUser}]]');
+</script>
+</html>

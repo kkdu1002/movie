@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>영화 관리</title>
+</head>
+<body>
+
+<h1>영화 관리 페이지</h1>
+
+<!-- 🔍 검색 폼 -->
+<form method="post" th:action="@{/home/movieTrk}" th:object="${createMovieDto}">
+  <label>감독: <input type="text" name="director"></label><br>
+  <label>장르: <input type="text" name="genre"></label><br>
+  <label>제목: <input type="text" name="title"></label><br>
+  <label>상영시간: <input type="text" name="runtime"></label><br>
+  <button type="submit">등록</button>
+</form>
+
+<hr>
+<!-- 결과 표시 -->
+<table th:if="${movieData != null}">
+  <thead>
+  <tr>
+    <th>제목</th>
+    <th>장르</th>
+    <th>감독</th>
+    <th>상영시간</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="movie : ${movieData}">
+    <td th:text="${movie.title}">제목</td>
+    <td th:text="${movie.genre}">장르</td>
+    <td th:text="${movie.director}">감독</td>
+    <td th:text="${movie.runtime}">상영시간</td>
+    <td>
+      <form th:action="@{/home/schedule}" method="post" th:object="${movie}">
+        <input type="hidden" th:name="id" th:value="${movie.id}" />
+        <button type="submit">스케줄 편집</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/home/movieTrk/delete}" method="post" th:object="${movie}">
+        <input type="hidden" th:name="id" th:value="${movie.id}" />
+        <button type="submit">삭제</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+<a th:href="@{/home/admin}">관리자화면으로</a>
+</body>
+<script th:if="${deleteUser != null}">
+  alert('[[${deleteUser}]]')
+</script>
+</html>

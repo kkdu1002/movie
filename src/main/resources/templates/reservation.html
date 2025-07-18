@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 관리</title>
+</head>
+<body>
+<table th:if="${reservationList != null}">
+  <thead>
+  <tr>
+    <th>유저 아이디</th>
+    <th>영화 제목</th>
+    <th>장르</th>
+    <th>상영시간</th>
+    <th>상영관</th>
+    <th>시작시간</th>
+    <th>좌석명</th>
+    <th>예약시각</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="reservation : ${reservationList}">
+    <td th:text="${reservation.user.username}">유저 아이디</td>
+    <td th:text="${reservation.schedule.movie.title}">영화 제목</td>
+    <td th:text="${reservation.schedule.movie.genre}">장르</td>
+    <td th:text="${reservation.schedule.movie.runtime}">상영시간</td>
+    <td th:text="${reservation.schedule.theater}">상영관</td>
+    <td th:text="${#temporals.format(reservation.schedule.screenTime , 'yyyy-MM-dd HH:mm')}">시작시간</td>
+    <td th:text="${reservation.seatNumber}">좌석명</td>
+    <td th:text="${#temporals.format(reservation.reservationTime , 'yyyy-MM-dd HH:mm')}">예약시각</td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{${session.userRole == '2'} ? '/home/admin' : '/home/main'}">메인으로</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예매</title>
+</head>
+<body>
+<table th:if="${scheduleData != null}">
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>감독</th>
+        <th>장르</th>
+        <th>상영시간</th>
+        <th>상영관명</th>
+        <th>시작시간</th>
+        <th>예약 가능 좌석수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="schedule : ${scheduleData}">
+        <td th:text="${schedule.movie.title}">제목</td>
+        <td th:text="${schedule.movie.genre}">장르</td>
+        <td th:text="${schedule.movie.director}">감독</td>
+        <td th:text="${schedule.movie.runtime}">상영시간</td>
+        <td th:text="${schedule.theater}">상영관명</td>
+        <td th:text="${#temporals.format(schedule.screenTime , 'yyyy-MM-dd HH:mm')}">시작시간</td>
+        <td th:text="${schedule.availableSeats - (schedule.reservationList != null ? schedule.reservationList.size() : 0)} + '/' +${schedule.availableSeats}">예약 가능 좌석수</td>
+        <td>
+            <form th:action="@{/home/insReservation}" method="get" th:object="${schedule}">
+                <input type="hidden" th:name="id" th:value="${schedule.id}" />
+                <button type="submit">예약</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/home/main}">메인으로</a>
+</body>
+</html>

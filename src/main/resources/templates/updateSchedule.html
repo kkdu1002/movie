@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>스케쥴 갱싱</title>
+</head>
+<script th:inline="javascript">
+  const scheduleId = [[${schedule.id}]];
+
+  function updateSchedule() {
+    const data = {
+      theater: document.getElementById("theater").value,
+      screenTime: document.getElementById("screenTime").value
+    };
+
+    fetch(`/home/schedule/edit/${scheduleId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then(res => {
+      if(res.ok)  {
+        alert("수정 성공");
+        window.location.href = "/home/scheduleList";
+      }
+      else {
+        alert("실패");
+      }
+    });
+  }
+  /*]]>*/
+</script>
+<body>
+ <table>
+   <tr>
+     <th>제목</th>
+     <th>감독</th>
+     <th>장르</th>
+     <th>상영시간</th>
+     <th>상영관명</th>
+     <th>시작시간</th>
+     <th>예약 가능 좌석수</th>
+   </tr>
+   <tr>
+     <td><input type = "text" th:value = "${schedule.movie.title}" readonly/></td>
+     <td><input type = "text" th:value = "${schedule.movie.director}" readonly/></td>
+     <td><input type = "text" th:value = "${schedule.movie.genre}" readonly/></td>
+     <td><input type = "text" th:value = "${schedule.movie.runtime}" readonly/></td>
+     <td><input type = "text" id = "theater" th:value = "${schedule.theater}"/></td>
+     <td><input type = "datetime-local" id = "screenTime" th:value = "${#temporals.format(schedule.screenTime,'yyyy-MM-dd HH:mm')}"/></td>
+     <td><input type = "text" id = "availableSeats" th:value = "${schedule.availableSeats}"/></td>
+   </tr>
+ </table>
+<button onclick="updateSchedule()">변경</button>
+</body>
+</html>

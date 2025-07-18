@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+<form method="post" th:action="@{/home/insertUser} ">
+  유저 아이디<input type="text" name = "username"><br>
+  유저 패스워드<input type="password" name="passwd"><br>
+  유저 이메일<input type="text" name = "email"><br>
+<button type="submit">가입하기</button>
+</form>
+<a th:href="@{/home}">홈 화면으로 이동</a>
+</body>
+</html>

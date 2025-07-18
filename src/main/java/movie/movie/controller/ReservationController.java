@@ -1,0 +1,85 @@
+package movie.movie.controller;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import movie.movie.domain.Reservation;
+import movie.movie.domain.Schedule;
+import movie.movie.domain.User;
+import movie.movie.dto.CreateReservationDto;
+import movie.movie.service.ReservationService;
+import movie.movie.service.ScheduleService;
+import movie.movie.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Controller
+@RequiredArgsConstructor
+public class ReservationController {
+
+    private final ReservationService reservationService;
+    private final ScheduleService scheduleService;
+    private final UserService userService;
+
+    @GetMapping("/home/reservation")
+    public String initReservationAdmin(HttpSession session ,Model model) {
+
+        Long userid = (Long) session.getAttribute("userid");
+
+        User user = userService.findOne(userid);
+        List<Reservation> reservationList;
+
+        if(user.getRole().equals("2")) {
+            reservationList = reservationService.findAll();
+        }
+        else {
+            reservationList = reservationService.findUser(user.getUsername());
+        }
+
+        model.addAttribute("reservationList",reservationList);
+
+        return "reservation";
+    }
+
+    @GetMapping("/home/insReservation")
+    public String initReservation(HttpSession session , @RequestParam("id") Long scheduleId ,
+                                  CreateReservationDto dto , Model model) {
+        Long userid = (Long) session.getAttribute("userid");
+
+        User user = userService.findOne(userid);
+        Schedule schedule = scheduleService.findOne(scheduleId);
+
+        dto.setUserId(user.getId());
+        dto.setScheduleId(schedule.getId());
+
+        model.addAttribute("schedule" , schedule);
+
+        model.addAttribute("reservationDto" , dto);
+
+        return "insReservation";
+    }
+
+    @PostMapping("/home/insReservation")
+    public String createReservation(@ModelAttribute CreateReservationDto reservationDto) {
+        User user = userService.findOne(reservationDto.getUserId());
+        Schedule schedule = scheduleService.findOne(reservationDto.getScheduleId());
+
+        Reservation reservation = Reservation.builder()
+                .user(user)
+                .schedule(schedule)
+                .seatNumber(reservationDto.getSearNumber())
+                .build();
+
+        reservationService.save(reservation);
+        return "redirect:/home/insertSchedule";
+    }
+
+    /*
+    public String cancelReservation(@RequestParam("id") Long id) {
+        reservationService.deleteReservation(id);
+    }
+    */
+}
