@@ -18,5 +18,5 @@ public class CreateReservationDto {
     // スケジュール
     private Long scheduleId;
     // 座席
-    private String searNumber;
+    private String seatNumber;
 }

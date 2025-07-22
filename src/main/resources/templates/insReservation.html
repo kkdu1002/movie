@@ -13,7 +13,7 @@
 <form method="post" th:action="@{/home/insReservation}" th:object="${reservationDto}">
   <input type="hidden" th:field="*{userId}"/>
   <input type="hidden" th:field="*{scheduleId}"/>
-  좌석번호 <input type="text" th:field="*{searNumber}"/>
+  좌석번호 <input type="text" th:field="*{seatNumber}"/>
   <button type="submit">등록</button>
 </form>
 </body>

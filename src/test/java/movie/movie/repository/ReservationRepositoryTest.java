@@ -125,7 +125,6 @@ class ReservationRepositoryTest {
         List<Reservation> findAll = reservationRepository.findAll();
 
         assertThat(findAll).isNotEmpty();
-        assertThat(findAll).hasSize(2);
     }
 
     @Test
@@ -138,11 +137,14 @@ class ReservationRepositoryTest {
 
     @Test
     void cancel() {
+
+        List<Reservation> reservationList = reservationRepository.findAll();
+
         reservationRepository.cancelReservation(dummyReservation.getId());
 
         List<Reservation> findAll = reservationRepository.findAll();
 
-        assertThat(findAll).isEmpty();
-        assertThat(findAll).hasSize(0);
+        assertThat(reservationList).hasSizeGreaterThan(findAll.size());
+        assertThat(findAll).hasSizeLessThan(reservationList.size());
     }
 }

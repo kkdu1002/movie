@@ -73,7 +73,7 @@ public class ReservationController {
         Reservation reservation = Reservation.builder()
                 .user(user)
                 .schedule(schedule)
-                .seatNumber(reservationDto.getSearNumber())
+                .seatNumber(reservationDto.getSeatNumber())
                 .build();
 
         reservationService.save(reservation);

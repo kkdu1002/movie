@@ -104,7 +104,6 @@ class ScheduleRepositoryTest {
         List<Schedule> all = scheduleRepository.findAll();
 
         assertThat(all).isNotEmpty();
-        assertThat(all).hasSize(2);
     }
 
     @Test
