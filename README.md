@@ -4,31 +4,31 @@
 SpringBootとJPAを使って実装した、学習用プロジェクトです。
 
 ## 機能
-・会員登録、ログイン
-・映画リスト表示
-・予約管理（予約確認、キャンセル）
-・映画の登録
+・会員登録、ログイン<br>
+・映画リスト表示<br>
+・予約管理（予約確認、キャンセル）<br>
+・映画の登録<br>
 ・映画のスケジュール管理
 
 ## 技術スタック
-・SpringBoot
-・Spring Web
-・Thymeleaf
-・Lombok
-・JPA(Hibernate)
-・PostgreSQL
-・QueryDSL
+・SpringBoot<br>
+・Spring Web<br>
+・Thymeleaf<br>
+・Lombok<br>
+・JPA(Hibernate)<br>
+・PostgreSQL<br>
+・QueryDSL<br>
 
 ## パッケージ構成
 ・config
-JPAQueryFactory設定用パッケージ
+JPAQueryFactory設定用パッケージ<br>
 ・controller
-画面連携
+画面連携<br>
 ・domain
-エンティティ定義
+エンティティ定義<br>
 ・dto
-データ転送オブジェクト
+データ転送オブジェクト<br>
 ・repository
-DBアクセス処理
+DBアクセス処理<br>
 ・service
 ビジネスロジック処理
