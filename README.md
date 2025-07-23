@@ -18,3 +18,17 @@ SpringBootとJPAを使って実装した、学習用プロジェクトです。
 ・JPA(Hibernate)
 ・PostgreSQL
 ・QueryDSL
+
+## パッケージ構成
+・config
+JPAQueryFactory設定用パッケージ
+・controller
+画面連携
+・domain
+エンティティ定義
+・dto
+データ転送オブジェクト
+・repository
+DBアクセス処理
+・service
+ビジネスロジック処理
