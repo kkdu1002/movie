@@ -17,18 +17,12 @@ SpringBootとJPAを使って実装した、学習用プロジェクトです。
 ・Lombok<br>
 ・JPA(Hibernate)<br>
 ・PostgreSQL<br>
-・QueryDSL<br>
+・QueryDSL
 
 ## パッケージ構成
-・config
-JPAQueryFactory設定用パッケージ<br>
-・controller
-画面連携<br>
-・domain
-エンティティ定義<br>
-・dto
-データ転送オブジェクト<br>
-・repository
-DBアクセス処理<br>
-・service
-ビジネスロジック処理
+・config:JPAQueryFactory設定用パッケージ<br>
+・controller:画面連携<br>
+・domain:エンティティ定義<br>
+・dto:データ転送オブジェクト<br>
+・repository:DBアクセス処理<br>
+・service:ビジネスロジック処理
