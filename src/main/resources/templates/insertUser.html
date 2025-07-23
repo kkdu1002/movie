@@ -14,13 +14,16 @@
     }
 </style>
 <body>
-<form method="post" th:action="@{/home/insertUser} ">
+<form method="post" th:action="@{/home/insertUser}" th:object="${createUserDto}">
   <label>ユーザーID</label>
     <input type="text" name = "username" style="margin-left : 5px;"><br>
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
   <label>パスワード</label>
     <input type="password" name="passwd" style="margin-left : 5px;"><br>
+    <div th:if="${#fields.hasErrors('passwd')}" th:errors="*{passwd}"></div>
   <label>Eメール</label>
     <input type="text" name = "email" style="margin-left : 26px;"><br>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 <button type="submit" style="margin-top : 5px;margin-left : 90px;">登録</button>
     <a th:href="@{/home}">
         <button type="button" style="margin-left : 42px;">ホーム画面</button>

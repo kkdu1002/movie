@@ -76,7 +76,7 @@ public class MovieController {
 
         movieRepository.deleteMovie(id);
 
-        redirectAttributes.addFlashAttribute("deleteUser" , "삭제되었습니다.");
+        redirectAttributes.addFlashAttribute("deleteUser" , "削除されました。");
 
         return "redirect:/home/movieTrk";
     }

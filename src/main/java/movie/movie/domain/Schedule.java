@@ -52,8 +52,4 @@ public class Schedule {
         }
     }
 
-    // 使用可能座席数を計算
-    public void updateAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats - reservationList.size();
-    }
 }

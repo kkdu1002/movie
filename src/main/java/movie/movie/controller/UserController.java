@@ -1,6 +1,7 @@
 package movie.movie.controller;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import movie.movie.domain.User;
@@ -10,10 +11,14 @@ import movie.movie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -40,7 +45,7 @@ public class UserController {
             }
         }
         else {
-            redirectAttributes.addFlashAttribute("loginErr" , "입력된 아이디 , 비밀번호가 다릅니다.");
+            redirectAttributes.addFlashAttribute("loginErr" , "入力されたID、PWが違います。");
             return "redirect:/home";
         }
     }
@@ -56,8 +61,13 @@ public class UserController {
 
     //会員登録処理
     @PostMapping("/home/insertUser")
-    public String createUserForm(@ModelAttribute CreateUserDto dto,
+    public String createUserForm(@ModelAttribute @Valid CreateUserDto dto,
+                                 BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
+        //validation
+        if (bindingResult.hasErrors()) {
+            return "insertUser";
+        }
         User user = User.builder()
                 .username(dto.getUsername())
                 .passwd(dto.getPasswd())
@@ -65,7 +75,7 @@ public class UserController {
                 .role(dto.getRole())
                 .build();
 
-        redirectAttributes.addFlashAttribute("createUser","회원등록 완료");
+        redirectAttributes.addFlashAttribute("createUser","会員登録完了");
 
         userService.save(user);
 
