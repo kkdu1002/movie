@@ -11,10 +11,10 @@ SpringBootとJPAを使って実装した、学習用プロジェクトです。
 ・映画のスケジュール管理
 
 ## 技術スタック
-SpringBoot
-Spring Web
-Thymeleaf
-Lombok
-JPA(Hibernate)
-PostgreSQL
-QueryDSL
+・SpringBoot
+・Spring Web
+・Thymeleaf
+・Lombok
+・JPA(Hibernate)
+・PostgreSQL
+・QueryDSL
