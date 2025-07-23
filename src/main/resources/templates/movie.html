@@ -2,49 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>영화 검색</title>
+    <title>映画検索</title>
 </head>
 <body>
 
-<h1>영화 검색</h1>
+<h1>映画検索</h1>
 
-<!-- 🔍 검색 폼 -->
+<!-- 検索 -->
 <form method="get" th:action="@{/home/movie}">
-    <label>감독: <input type="text" name="director"></label><br>
-    <label>장르: <input type="text" name="genre"></label><br>
-    <label>제목: <input type="text" name="title"></label><br>
-    <button type="submit">검색</button>
+    <label>監督: <input type="text" name="director"></label><br>
+    <label>ジャンル: <input type="text" name="genre"></label><br>
+    <label>タイトル: <input type="text" name="title"></label><br>
+    <button type="submit">検索</button>
 </form>
 
 <hr>
 
-<!-- ⚠️ 검색 결과 없을 때 메시지 -->
+<!-- 検索結果がない場合 -->
 <div th:if="${noSearch}" style="color:red;">
     <p th:text="${noSearch}"></p>
 </div>
 
-<!-- 🎬 검색 결과 표시 -->
+<!-- 検索結果表示 -->
 <table th:if="${movieData != null}">
     <thead>
     <tr>
-        <th>제목</th>
-        <th>감독</th>
-        <th>장르</th>
-        <th>상영시간</th>
+        <th>タイトル</th>
+        <th>監督</th>
+        <th>ジャンル</th>
+        <th>上映時間</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="movie : ${movieData}">
-        <td th:text="${movie.title}">제목</td>
-        <td th:text="${movie.genre}">장르</td>
-        <td th:text="${movie.director}">감독</td>
-        <td th:text="${movie.runtime}">상영시간</td>
+        <td th:text="${movie.title}">タイトル</td>
+        <td th:text="${movie.genre}">ジャンル</td>
+        <td th:text="${movie.director}">監督</td>
+        <td th:text="${movie.runtime}">上映時間</td>
     </tr>
     </tbody>
 </table>
 
 <br>
-<a th:href="@{${session.userRole == '2'} ? '/home/admin' : '/home/main'}">메인으로</a>
+<a th:href="@{${session.userRole == '2'} ? '/home/admin' : '/home/main'}">メイン画面</a>
 
 </body>
 </html>

@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>予約</title>
 </head>
 <body>
-<p>영화명 : <span th:text="${schedule.movie.title}">영화명</span></p>
-<p>영화 장르 : <span th:text="${schedule.movie.genre}">영화 장르</span></p>
-<p>상영시간 : <span th:text="${schedule.movie.runtime}">상영시간</span></p>
-<p>상영관 : <span th:text="${schedule.theater}">상영관</span></p>
-<p>상영 시작 시간 : <span th:text="${#temporals.format(schedule.screenTime,'yyyy-MM-dd HH:mm')}">상영 시작 시간</span></p>
+<p>タイトル : <span th:text="${schedule.movie.title}">タイトル</span></p>
+<p>ジャンル : <span th:text="${schedule.movie.genre}">ジャンル</span></p>
+<p>上映時間 : <span th:text="${schedule.movie.runtime}">上映時間</span></p>
+<p>シアター : <span th:text="${schedule.theater}">シアター</span></p>
+<p>上映開始時間 : <span th:text="${#temporals.format(schedule.screenTime,'yyyy-MM-dd HH:mm')}">上映開始時間</span></p>
 <form method="post" th:action="@{/home/insReservation}" th:object="${reservationDto}">
   <input type="hidden" th:field="*{userId}"/>
   <input type="hidden" th:field="*{scheduleId}"/>
-  좌석번호 <input type="text" th:field="*{seatNumber}"/>
-  <button type="submit">등록</button>
+  座席 <input type="text" th:field="*{seatNumber}"/>
+  <button type="submit">予約</button>
 </form>
 </body>
 </html>

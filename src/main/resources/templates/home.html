@@ -2,15 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>홈 화면</title>
+    <title>ホーム画面</title>
 </head>
+<style>
+    html, body {
+    height: 100%;
+    margin: 0;
+  }
+    body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+</style>
 <body>
 <form method  = "post" th:action="@{/home}">
-유저 아이디<input type = "text" name = "username"><br>
-유저 패스워드<input type = "password" name = "passwd"><br>
-  <button type="submit">로그인</button><br>
+    <label>ID</label>
+    <input type = "text" name = "username" placeholder="ID" style="margin-left : 15px;"><br><br>
+    <label>PW</label>
+    <input type = "password" name = "passwd" style="margin-left : 5px;"><br>
+    <button type="submit" style="margin-left : 35px; margin-top : 5px;">ログイン</button>
+    <a th:href="@{/home/insertUser}" style="margin-left : 30px;">
+        <button type="button">会員登録</button>
+    </a>
 </form>
-<a th:href="@{/home/insertUser}">회원가입</a>
 </body>
 <script th:if="${loginErr != null}">
   alert('[[${loginErr}]]');

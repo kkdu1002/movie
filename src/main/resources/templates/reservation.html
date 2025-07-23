@@ -2,35 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>예약 관리</title>
+    <title>予約管理</title>
 </head>
 <body>
 <table th:if="${reservationList != null}">
   <thead>
   <tr>
-    <th>유저 아이디</th>
-    <th>영화 제목</th>
-    <th>장르</th>
-    <th>상영시간</th>
-    <th>상영관</th>
-    <th>시작시간</th>
-    <th>좌석명</th>
-    <th>예약시각</th>
+    <th>ユーザーID</th>
+    <th>タイトル</th>
+    <th>ジャンル</th>
+    <th>上映時間</th>
+    <th>シアター</th>
+    <th>上映開始時間</th>
+    <th>予約座席</th>
+    <th>予約時間</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="reservation : ${reservationList}">
-    <td th:text="${reservation.user.username}">유저 아이디</td>
-    <td th:text="${reservation.schedule.movie.title}">영화 제목</td>
-    <td th:text="${reservation.schedule.movie.genre}">장르</td>
-    <td th:text="${reservation.schedule.movie.runtime}">상영시간</td>
-    <td th:text="${reservation.schedule.theater}">상영관</td>
-    <td th:text="${#temporals.format(reservation.schedule.screenTime , 'yyyy-MM-dd HH:mm')}">시작시간</td>
-    <td th:text="${reservation.seatNumber}">좌석명</td>
-    <td th:text="${#temporals.format(reservation.reservationTime , 'yyyy-MM-dd HH:mm')}">예약시각</td>
+    <td th:text="${reservation.user.username}">ユーザーID</td>
+    <td th:text="${reservation.schedule.movie.title}">タイトル</td>
+    <td th:text="${reservation.schedule.movie.genre}">ジャンル</td>
+    <td th:text="${reservation.schedule.movie.runtime}">上映時間</td>
+    <td th:text="${reservation.schedule.theater}">シアター</td>
+    <td th:text="${#temporals.format(reservation.schedule.screenTime , 'yyyy-MM-dd HH:mm')}">上映開始時間</td>
+    <td th:text="${reservation.seatNumber}">予約座席</td>
+    <td th:text="${#temporals.format(reservation.reservationTime , 'yyyy-MM-dd HH:mm')}">予約時間</td>
   </tr>
   </tbody>
 </table>
-<a th:href="@{${session.userRole == '2'} ? '/home/admin' : '/home/main'}">메인으로</a>
+<a th:href="@{${session.userRole == '2'} ? '/home/admin' : '/home/main'}">メイン画面</a>
 </body>
 </html>
