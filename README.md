@@ -19,6 +19,9 @@ SpringBootとJPAを使って実装した、学習用プロジェクトです。
 ・PostgreSQL<br>
 ・QueryDSL
 
+## バージョン管理
+Git / GitHub
+
 ## パッケージ構成
 ・config「JPAQueryFactory設定用パッケージ」<br>
 ・controller「画面連携」<br>
