@@ -11,6 +11,9 @@
 上映開始時間<input type="datetime-local" th:field="*{screenTime}"/>
 予約可能座席数<input type="text" th:field="*{availableSeats}"/>
   <button type="submit">登録</button>
+    <a th:href="@{/home/movieTrk}">
+        <button type="button">映画管理ページ</button>
+    </a>
 </form>
 </body>
 </html>

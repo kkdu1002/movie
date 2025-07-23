@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>스케쥴 갱싱</title>
+  <title>スケジュール修正</title>
 </head>
 <script th:inline="javascript">
   const scheduleId = [[${schedule.id}]];
@@ -21,11 +21,11 @@
       body: JSON.stringify(data)
     }).then(res => {
       if(res.ok)  {
-        alert("수정 성공");
+        alert("スケジュールを修正しました。");
         window.location.href = "/home/scheduleList";
       }
       else {
-        alert("실패");
+        alert("スケジュール修正に失敗しました。");
       }
     });
   }
@@ -34,13 +34,13 @@
 <body>
  <table>
    <tr>
-     <th>제목</th>
-     <th>감독</th>
-     <th>장르</th>
-     <th>상영시간</th>
-     <th>상영관명</th>
-     <th>시작시간</th>
-     <th>예약 가능 좌석수</th>
+     <th>タイトル</th>
+     <th>監督</th>
+     <th>ジャンル</th>
+     <th>上映時間</th>
+     <th>シアター</th>
+     <th>上映開始時間</th>
+     <th>予約可能座席数</th>
    </tr>
    <tr>
      <td><input type = "text" th:value = "${schedule.movie.title}" readonly/></td>
@@ -52,6 +52,6 @@
      <td><input type = "text" id = "availableSeats" th:value = "${schedule.availableSeats}"/></td>
    </tr>
  </table>
-<button onclick="updateSchedule()">변경</button>
+<button onclick="updateSchedule()">修正</button>
 </body>
 </html>

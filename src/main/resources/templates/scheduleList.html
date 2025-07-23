@@ -2,28 +2,28 @@
   <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title>스케줄 목록</title>
+    <title>スケジュールリスト</title>
   </head>
   <body>
-  <h1>상영 스케줄</h1>
+  <h1>上映スケジュール</h1>
   <table>
     <thead>
     <tr>
-      <th>영화 제목</th>
-      <th>상영관</th>
-      <th>시작 시간</th>
-      <th>좌석 수</th>
+      <th>タイトル</th>
+      <th>シアター</th>
+      <th>上映開始時間</th>
+      <th>座席数</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="schedule : ${scheduleList}">
-      <td th:text="${schedule.movie != null ? schedule.movie.title : '영화 없음'}">영화 제목</td>
-      <td th:text="${schedule.theater}">상영관</td>
-      <td th:text="${#temporals.format(schedule.screenTime, 'yyyy-MM-dd HH:mm')}">상영 시간</td>
-      <td th:text="${schedule.availableSeats}">좌석</td>
+      <td th:text="${schedule.movie != null ? schedule.movie.title : 'タイトル無し'}">タイトル</td>
+      <td th:text="${schedule.theater}">シアター</td>
+      <td th:text="${#temporals.format(schedule.screenTime, 'yyyy-MM-dd HH:mm')}">上映開始時間</td>
+      <td th:text="${schedule.availableSeats}">座席数</td>
       <td>
         <form th:action="@{/home/schedule/edit/{id}(id=${schedule.id})}" method="get">
-          <button type="submit">스케줄 편집</button>
+          <button type="submit">スケジュール修正</button>
         </form>
       </td>
     </tr>
