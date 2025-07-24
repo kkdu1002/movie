@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -40,6 +41,7 @@ public class ReservationController {
             reservationList = reservationService.findUser(user.getUsername());
         }
 
+        model.addAttribute("movieTime" , LocalDateTime.now());
         model.addAttribute("reservationList",reservationList);
 
         return "reservation";
@@ -80,9 +82,10 @@ public class ReservationController {
         return "redirect:/home/insertSchedule";
     }
 
-    /*
-    public String cancelReservation(@RequestParam("id") Long id) {
+    @DeleteMapping("/home/reservation/edit/{reservationId}")
+    @ResponseBody
+    public void cancelReservation(@PathVariable("reservationId") Long id) {
         reservationService.deleteReservation(id);
     }
-    */
+
 }

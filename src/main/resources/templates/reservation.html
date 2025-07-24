@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <title>予約管理</title>
 </head>
+<script th:inline="javascript">
+  function Yykcancle(id) {
+    fetch('/home/reservation/edit/' + id ,
+    {method : "DELETE" ,
+    headers : {"Content-Type" : "application/json"} ,
+    }).then(res => {
+      if(res.ok) {
+        alert("予約キャンセル")
+        window.location.href = "/home/reservation";
+      }
+      else {
+        alert("失敗");
+      }
+    });
+  }
+</script>
 <body>
 <table th:if="${reservationList != null}">
   <thead>
@@ -28,6 +44,10 @@
     <td th:text="${#temporals.format(reservation.schedule.screenTime , 'yyyy-MM-dd HH:mm')}">上映開始時間</td>
     <td th:text="${reservation.seatNumber}">予約座席</td>
     <td th:text="${#temporals.format(reservation.reservationTime , 'yyyy-MM-dd HH:mm')}">予約時間</td>
+    <td>
+      <button type="button" th:hidden="${reservation.schedule.screenTime.plusMinutes(20).isBefore(movieTime)}"
+              th:onclick="'Yykcancle(' + ${reservation.id} + ')'" >予約キャンセル</button>
+    </td>
   </tr>
   </tbody>
 </table>
