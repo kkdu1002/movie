@@ -71,12 +71,7 @@ public class MovieController {
             return "movieTrk";
         }
 
-        Movie movie = Movie.builder()
-                .director(dto.getDirector())
-                .genre(dto.getGenre())
-                .title(dto.getTitle())
-                .runtime(dto.getRuntime())
-                .build();
+        Movie movie = movieService.createMovie(dto);
 
         movieService.save(movie);
 

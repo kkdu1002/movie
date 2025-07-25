@@ -15,7 +15,7 @@
   <input type="hidden" th:field="*{scheduleId}"/>
   座席 <input type="text" th:field="*{seatNumber}"/>
     <div th:if="${#fields.hasErrors('seatNumber')}" th:errors="*{seatNumber}"></div>
-  <button type="submit">予約</button>
+  <button type="submit" onclick = "return confirm('予約します。よろしいでしょうか？')">予約</button>
 </form>
 <a th:href="@{/home/main}">メイン画面へ</a>
 </body>

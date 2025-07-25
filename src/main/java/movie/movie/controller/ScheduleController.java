@@ -42,18 +42,11 @@ public class ScheduleController {
             return "schedule";
         }
 
-        Movie movie = movieService.findOne(scheduleDto.getMovieId());
-
-        Schedule schedule = Schedule.builder()
-                .movie(movie)
-                .theater(scheduleDto.getTheater())
-                .screenTime(scheduleDto.getScreenTime())
-                .availableSeats(scheduleDto.getAvailableSeats())
-                .build();
+        Schedule schedule = scheduleService.createSchedule(scheduleDto);
 
         scheduleService.save(schedule);
 
-        return "redirect:/home/schedule/scheduleList";
+        return "redirect:/home/scheduleList";
     }
 
     //スケジュールリスト表示

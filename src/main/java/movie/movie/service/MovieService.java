@@ -4,6 +4,7 @@
     import jakarta.persistence.EntityManager;
     import lombok.RequiredArgsConstructor;
     import movie.movie.domain.Movie;
+    import movie.movie.dto.CreateMovieDto;
     import movie.movie.dto.UpdateMovieDto;
     import movie.movie.repository.MovieRepository;
     import org.springframework.stereotype.Service;
@@ -49,5 +50,14 @@
         @Transactional(readOnly = false)
         public void deleteMovie(Long id) {
             movieRepository.deleteMovie(id);
+        }
+
+        public Movie createMovie(CreateMovieDto dto) {
+            return Movie.builder()
+                    .director(dto.getDirector())
+                    .genre(dto.getGenre())
+                    .title(dto.getTitle())
+                    .runtime(dto.getRuntime())
+                    .build();
         }
     }

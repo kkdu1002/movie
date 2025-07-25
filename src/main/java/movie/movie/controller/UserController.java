@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static movie.movie.domain.QUser.user;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -68,12 +70,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "insertUser";
         }
-        User user = User.builder()
-                .username(dto.getUsername())
-                .passwd(dto.getPasswd())
-                .email(dto.getEmail())
-                .role(dto.getRole())
-                .build();
+        User user = userService.createUser(dto);
 
         redirectAttributes.addFlashAttribute("createUser","会員登録完了");
 

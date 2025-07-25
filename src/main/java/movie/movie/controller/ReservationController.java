@@ -74,7 +74,6 @@ public class ReservationController {
                                     BindingResult bindingResult ,
                                     Model model) {
 
-        User user = userService.findOne(reservationDto.getUserId());
         Schedule schedule = scheduleService.findOne(reservationDto.getScheduleId());
 
         if(bindingResult.hasErrors()) {
@@ -82,11 +81,7 @@ public class ReservationController {
             return "insReservation";
         }
 
-        Reservation reservation = Reservation.builder()
-                .user(user)
-                .schedule(schedule)
-                .seatNumber(reservationDto.getSeatNumber())
-                .build();
+        Reservation reservation = reservationService.createReservation(reservationDto);
 
         reservationService.save(reservation);
         return "redirect:/home/insertSchedule";

@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>映画管理</title>
 </head>
+<style>
+  th {
+    border : 1px solid black;
+    width : 100px;
+  }
+</style>
 <body>
 
 <h1>映画管理ページ</h1>
@@ -47,7 +53,7 @@
     <td>
       <form th:action="@{/home/movieTrk/delete}" method="post" th:object="${movie}">
         <input type="hidden" th:name="id" th:value="${movie.id}" />
-        <button type="submit">削除</button>
+        <button type="submit" onclick="return confirm('削除しますか？');">削除</button>
       </form>
     </td>
   </tr>

@@ -3,9 +3,12 @@ package movie.movie.service;
 import lombok.RequiredArgsConstructor;
 import movie.movie.domain.Reservation;
 import movie.movie.domain.Schedule;
+import movie.movie.domain.User;
+import movie.movie.dto.CreateReservationDto;
 import movie.movie.dto.UpdateReservationDto;
 import movie.movie.repository.ReservationRepository;
 import movie.movie.repository.ScheduleRepository;
+import movie.movie.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReservationService {
 
+    private final UserRepository userRepository;
     private final ReservationRepository reservationRepository;
     private final ScheduleRepository scheduleRepository;
 
@@ -63,5 +67,16 @@ public class ReservationService {
     @Transactional(readOnly = false)
     public void deleteReservation(Long id) {
         reservationRepository.cancelReservation(id);
+    }
+
+    public Reservation createReservation(CreateReservationDto dto) {
+        User user = userRepository.findOne(dto.getUserId());
+        Schedule schedule = scheduleRepository.findOne(dto.getScheduleId());
+
+        return Reservation.builder()
+                .user(user)
+                .schedule(schedule)
+                .seatNumber(dto.getSeatNumber())
+                .build();
     }
 }

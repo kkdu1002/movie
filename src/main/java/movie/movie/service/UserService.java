@@ -4,6 +4,7 @@ package movie.movie.service;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import movie.movie.domain.User;
+import movie.movie.dto.CreateUserDto;
 import movie.movie.dto.UpdateUserDto;
 import movie.movie.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,14 @@ public class UserService {
     @Transactional(readOnly = false)
     public void deleteUser(Long del_id) {
         userRepository.deleteUser(del_id);
+    }
+
+    public User createUser(CreateUserDto dto) {
+        return User.builder()
+                .username(dto.getUsername())
+                .passwd(dto.getPasswd())
+                .email(dto.getEmail())
+                .role(dto.getRole())
+                .build();
     }
 }
