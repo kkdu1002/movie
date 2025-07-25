@@ -1,6 +1,7 @@
 package movie.movie.controller;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import movie.movie.domain.Reservation;
 import movie.movie.domain.Schedule;
@@ -11,6 +12,7 @@ import movie.movie.service.ScheduleService;
 import movie.movie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -68,9 +70,17 @@ public class ReservationController {
 
     //予約処理
     @PostMapping("/home/insReservation")
-    public String createReservation(@ModelAttribute CreateReservationDto reservationDto) {
+    public String createReservation(@ModelAttribute("reservationDto") @Valid CreateReservationDto reservationDto ,
+                                    BindingResult bindingResult ,
+                                    Model model) {
+
         User user = userService.findOne(reservationDto.getUserId());
         Schedule schedule = scheduleService.findOne(reservationDto.getScheduleId());
+
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("schedule" , schedule);
+            return "insReservation";
+        }
 
         Reservation reservation = Reservation.builder()
                 .user(user)
