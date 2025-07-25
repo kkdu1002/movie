@@ -52,4 +52,10 @@ public class Schedule {
         }
     }
 
+    //予約可能座席数変更
+    public void updateAvailableSeats(int availableSeats) {
+        if(availableSeats != 0) {
+            this.availableSeats = availableSeats;
+        }
+    }
 }

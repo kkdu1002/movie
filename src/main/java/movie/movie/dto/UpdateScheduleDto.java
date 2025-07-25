@@ -17,4 +17,6 @@ public class UpdateScheduleDto {
     private String theater;
     //映画上映時間
     private LocalDateTime screenTime;
+    //予約可能座席数
+    private int availableSeats;
 }

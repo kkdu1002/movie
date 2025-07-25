@@ -70,6 +70,9 @@ public class ScheduleRepository {
             if(dto.getScreenTime() != null) {
                 updSchedule.updateScreenTime(dto.getScreenTime());
             }
+            if(dto.getAvailableSeats() != 0) {
+                updSchedule.updateAvailableSeats(dto.getAvailableSeats());
+            }
         }
     }
 }
