@@ -10,10 +10,14 @@
 
 <!-- 検索 -->
 <form method="post" th:action="@{/home/movieTrk}" th:object="${createMovieDto}">
-  <label>監督: <input type="text" name="director"></label><br>
+  <label>監督: <input type="text" name="director" style="margin-left : 31px;"></label><br>
+  <div th:if="${#fields.hasErrors('director')}" th:errors="*{director}"></div>
   <label>ジャンル: <input type="text" name="genre"></label><br>
+  <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
   <label>タイトル: <input type="text" name="title"></label><br>
+  <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
   <label>上映時間: <input type="text" name="runtime"></label><br>
+  <div th:if="${#fields.hasErrors('runtime')}" th:errors="*{runtime}"></div>
   <button type="submit">映画情報登録</button>
 </form>
 
@@ -35,7 +39,7 @@
     <td th:text="${movie.director}">監督</td>
     <td th:text="${movie.runtime}">上映時間</td>
     <td>
-      <form th:action="@{/home/schedule}" method="post" th:object="${movie}">
+      <form th:action="@{/home/schedule}" method="get" th:object="${movie}">
         <input type="hidden" th:name="id" th:value="${movie.id}" />
         <button type="submit">スケジュール管理</button>
       </form>

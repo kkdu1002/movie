@@ -1,0 +1,35 @@
+## 妥当性確認のメッセージが画面に表示されない
+
+@PostMapping("/home/schedule")
+    public String scheduleForm(@ModelAttribute @Valid CreateScheduleDto scheduleDto ,
+                               BindingResult bindingResult ,
+                               Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("scheduleDto", scheduleDto);
+            return "schedule";
+        }
+
+        Movie movie = movieService.findOne(scheduleDto.getMovieId());
+
+        Schedule schedule = Schedule.builder()
+                .movie(movie)
+                .theater(scheduleDto.getTheater())
+                .screenTime(scheduleDto.getScreenTime())
+                .availableSeats(scheduleDto.getAvailableSeats())
+                .build();
+
+        scheduleService.save(schedule);
+
+        return "redirect:/home/schedule/scheduleList";
+    }
+
+## 解決方法
+    public String scheduleForm(@ModelAttribute("scheduleDto") @Valid CreateScheduleDto scheduleDto ,
+                               BindingResult bindingResult ,
+                               Model model) {
+        if(bindingResult.hasErrors()) {
+            return "schedule";
+        }
+    にように修正
+    問題のコードではSpringがmodelの属性が指定されてないため"CreateScheduleDto"を登録し、"scheduleDto"も登録する。
+    結果的に"CreateScheduleDto"にエラーの情報があり、"scheduleDto"にはエラー情報がないためエラーメッセージが表示されなっかた。

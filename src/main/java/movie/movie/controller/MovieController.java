@@ -1,11 +1,14 @@
 package movie.movie.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import movie.movie.domain.Movie;
 import movie.movie.dto.CreateMovieDto;
 import movie.movie.repository.MovieRepository;
+import movie.movie.service.MovieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieController {
 
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
     //映画データ表示
     @GetMapping("/home/movie")
@@ -32,10 +35,10 @@ public class MovieController {
         if((director == null || director.isBlank()) &&
            (genre == null || genre.isBlank()) &&
            (title == null || title.isBlank())) {
-            movieData = movieRepository.findAll();
+            movieData = movieService.findAll();
         }
         else {
-            movieData = movieRepository.findMovieData(director, genre, title);
+            movieData = movieService.findMovieData(director, genre, title);
         }
         model.addAttribute("movieData",movieData);
         return "movie";
@@ -47,7 +50,7 @@ public class MovieController {
 
         model.addAttribute("createMovieDto", new CreateMovieDto());
 
-        List<Movie> findAllMovie = movieRepository.findAll();
+        List<Movie> findAllMovie = movieService.findAll();
 
         model.addAttribute("movieData",findAllMovie);
         return "movieTrk";
@@ -55,7 +58,18 @@ public class MovieController {
 
     //映画登録処理（管理者用）
     @PostMapping("/home/movieTrk")
-    public String MovieForm(@ModelAttribute CreateMovieDto dto) {
+    public String MovieForm(@ModelAttribute @Valid CreateMovieDto dto ,
+                            BindingResult bindingResult,
+                            Model model) {
+
+        if(bindingResult.hasErrors()) {
+
+            List<Movie> findAllMovie = movieService.findAll();
+
+            model.addAttribute("movieData",findAllMovie);
+
+            return "movieTrk";
+        }
 
         Movie movie = Movie.builder()
                 .director(dto.getDirector())
@@ -64,7 +78,7 @@ public class MovieController {
                 .runtime(dto.getRuntime())
                 .build();
 
-        movieRepository.save(movie);
+        movieService.save(movie);
 
         return "redirect:/home/movieTrk";
     }
@@ -74,7 +88,7 @@ public class MovieController {
     public String delMovie(@RequestParam("id") Long id
             , RedirectAttributes redirectAttributes) {
 
-        movieRepository.deleteMovie(id);
+        movieService.deleteMovie(id);
 
         redirectAttributes.addFlashAttribute("deleteUser" , "削除されました。");
 

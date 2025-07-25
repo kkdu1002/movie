@@ -20,7 +20,7 @@ public class CreateMovieDto {
     private String director;
     @NotNull(message = "上映時間必須")
     @Min(value = 1, message = "上映時間は１分以上です。")
-    private int runtime;
+    private Integer runtime;
     @NotBlank(message = "ジャンル必須")
     private String genre;
 }

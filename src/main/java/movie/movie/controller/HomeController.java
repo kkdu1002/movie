@@ -1,5 +1,6 @@
 package movie.movie.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import movie.movie.dto.CreateUserDto;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,8 @@ public class HomeController {
 
     //初期画面
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model , HttpSession session) {
+        session.invalidate();
 
         model.addAttribute("createUserDto",new CreateUserDto());
 

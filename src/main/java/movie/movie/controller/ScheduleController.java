@@ -1,5 +1,6 @@
 package movie.movie.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import movie.movie.domain.Movie;
 import movie.movie.domain.Schedule;
@@ -9,6 +10,7 @@ import movie.movie.service.MovieService;
 import movie.movie.service.ScheduleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +24,9 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     //スケジュール登録画面表示
-    @PostMapping("/home/schedule")
-    public String initScheduleForm(@RequestParam("id") Long movieId , Model model , CreateScheduleDto dto) {
-
+    @GetMapping("/home/schedule")
+    public String initScheduleForm(@RequestParam("id") Long movieId , Model model) {
+        CreateScheduleDto dto = new CreateScheduleDto();
         dto.setMovieId(movieId);
         model.addAttribute("scheduleDto", dto);
 
@@ -32,8 +34,13 @@ public class ScheduleController {
     }
 
     //スケジュール登録
-    @PostMapping("/home/schedule/new")
-    public String scheduleForm(@ModelAttribute CreateScheduleDto scheduleDto) {
+    @PostMapping("/home/schedule")
+    public String scheduleForm(@ModelAttribute("scheduleDto") @Valid CreateScheduleDto scheduleDto ,
+                               BindingResult bindingResult ,
+                               Model model) {
+        if(bindingResult.hasErrors()) {
+            return "schedule";
+        }
 
         Movie movie = movieService.findOne(scheduleDto.getMovieId());
 

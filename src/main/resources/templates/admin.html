@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <title>管理者ページ</title>
 </head>
+<style>
+    body {
+        background-color: #f9f9f9;
+    }
+    div {
+        text-align : center;
+    }
+</style>
 <body>
-<a th:href="@{/home/movieTrk}">映画管理</a><br>
-<a th:href="@{/home/user}">会員管理</a><br>
-<a th:href="@{/home/movie}">映画</a><br>
-<a th:href="@{/home}">ログアウト</a><br>
-<a th:href="@{/home/scheduleList}">スケジュール管理</a><br>
-<a th:href="@{/home/reservation}">予約確認</a>
+<div>
+    <a th:href="@{/home/movieTrk}" th:style="'font-size:25px;'">映画管理</a><br><br>
+    <a th:href="@{/home/user}" th:style="'font-size:25px;'">会員管理</a><br><br>
+    <a th:href="@{/home/movie}" th:style="'font-size:25px;'">映画</a><br><br>
+    <a th:href="@{/home}" th:style="'font-size:25px;'">ログアウト</a><br><br>
+    <a th:href="@{/home/scheduleList}" th:style="'font-size:25px;'">スケジュール管理</a><br><br>
+    <a th:href="@{/home/reservation}" th:style="'font-size:25px;'">予約確認</a>
+</div>
 </body>
 </html>

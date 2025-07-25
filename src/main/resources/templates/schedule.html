@@ -5,11 +5,14 @@
     <title>映画スケジュール登録</title>
 </head>
 <body>
-<form method="post" th:action="@{/home/schedule/new}" th:object="${scheduleDto}">
+<form method="post" th:action="@{/home/schedule}" th:object="${scheduleDto}">
   <input type="hidden" th:field="*{movieId}" />
-シアター<input type="text" th:field="*{theater}"/>
-上映開始時間<input type="datetime-local" th:field="*{screenTime}"/>
-予約可能座席数<input type="text" th:field="*{availableSeats}"/>
+シアター<input type="text" th:field="*{theater}"/><br>
+    <div th:if="${#fields.hasErrors('theater')}" th:errors="*{theater}"></div>
+上映開始時間<input type="datetime-local" th:field="*{screenTime}"/><br>
+    <div th:if="${#fields.hasErrors('screenTime')}" th:errors="*{screenTime}"></div>
+予約可能座席数<input type="number" th:field="*{availableSeats}"/><br>
+    <div th:if="${#fields.hasErrors('availableSeats')}" th:errors="*{availableSeats}"></div>
   <button type="submit">登録</button>
     <a th:href="@{/home/movieTrk}">
         <button type="button">映画管理ページ</button>
