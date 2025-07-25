@@ -30,6 +30,6 @@
         if(bindingResult.hasErrors()) {
             return "schedule";
         }
-    にように修正
+    このように修正
     問題のコードではSpringがmodelの属性が指定されてないため"CreateScheduleDto"を登録し、"scheduleDto"も登録する。
     結果的に"CreateScheduleDto"にエラーの情報があり、"scheduleDto"にはエラー情報がないためエラーメッセージが表示されなっかた。
